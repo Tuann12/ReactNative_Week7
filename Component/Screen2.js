@@ -29,31 +29,58 @@ function Screen2({ navigation }) {
                     </TouchableOpacity>
                 </View>
                 {data.map((item) => (
-                    <View style={{ margin: 5 }}>
-                        <TouchableOpacity style={{}}>
+                    <View style={{ marginTop: 10 }}>
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate('Screen3')}
+                            style={{ width: 347, height: 200, backgroundColor: '#FFFFFF' }}
+                        >
                             <Image
                                 source={{ uri: item.image }}
-                                style={{ width: 200, height: 62, borderRadius: 6, resizeMode: 'cover' }}
+                                style={{ width: 347, height: 114, borderRadius: 6, resizeMode: 'cover' }}
                             />
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                <Image
-                                    style={{ width: 19, height: 14, resizeMode: 'contain' }}
-                                    source={require('../assets/iconCheck.png')}
-                                />
-                                <Text>{item.status == true ? 'Accepting Orders' : 'Tempory Unavailable'}</Text>
+                            <View
+                                style={{
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    backgroundColor: '#F3F4F6',
+                                    margin: 5,
+                                    paddingVertical: 3,
+                                }}
+                            >
+                                {item.status == true ? (
+                                    <Image
+                                        style={{ width: 19, height: 14, resizeMode: 'contain' }}
+                                        source={require('../assets/iconCheck.png')}
+                                    />
+                                ) : (
+                                    <Image
+                                        style={{ width: 19, height: 14, resizeMode: 'contain' }}
+                                        source={require('../assets/iconClock.png')}
+                                    />
+                                )}
+                                {item.status == true ? (
+                                    <Text style={{ fontSize: 14, fontWeight: 400, color: '#1DD75B' }}>
+                                        Accepting Orders
+                                    </Text>
+                                ) : (
+                                    <Text style={{ fontSize: 14, fontWeight: 400, color: '#DE3B40' }}>
+                                        Tempory Unavailable
+                                    </Text>
+                                )}
                                 <Image
                                     style={{ width: 19, height: 14, resizeMode: 'contain' }}
                                     source={require('../assets/iconClockWatcher.png')}
                                 />
-                                <Text>{item.time}</Text>
+                                <Text style={{ fontSize: 14, fontWeight: 400, color: '#DE3B40' }}>{item.time}</Text>
                                 <Image
                                     style={{ width: 19, height: 14, resizeMode: 'contain' }}
                                     source={require('../assets/iconLocation.png')}
                                 />
                             </View>
-                            <View>
-                                <Text>{item.title}</Text>
-                                <Text>{item.address}</Text>
+                            <View style={{ margin: 5 }}>
+                                <Text style={{ fontSize: 16, fontWeight: 700, color: '#171A1F' }}>{item.title}</Text>
+                                <Text style={{ fontSize: 14, fontWeight: 700, color: '#171A1F' }}>{item.address}</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
