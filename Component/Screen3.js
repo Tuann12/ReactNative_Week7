@@ -3,6 +3,21 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 function Screen4({ navigation }) {
     const [data, setData] = useState([]);
+    const [count, setCount] = useState(0);
+
+    const handleAdd = () => {
+        setCount((prevCount) => prevCount + 1);
+    };
+    console.log('Tang=>', count);
+
+    const handleDelete = () => {
+        if (count > 0) {
+            setCount((prevCount) => prevCount - 1);
+        } else {
+            setCount((prevCount) => (prevCount = 0));
+        }
+    };
+    console.log('Giam=>', count);
 
     useEffect(() => {
         fetch('https://653f75499e8bd3be29e09ced.mockapi.io/listCoffee')
@@ -20,7 +35,7 @@ function Screen4({ navigation }) {
                         alignItems: 'center',
                     }}
                 >
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Screen2')}>
                         <Image style={{ width: 44, height: 44 }} source={require('../assets/iconArrow.png')} />
                     </TouchableOpacity>
                     <Text style={{ fontSize: 24, fontWeight: 700, marginHorizontal: 60 }}>Drink</Text>
@@ -59,12 +74,24 @@ function Screen4({ navigation }) {
                                     </Text>
                                 </View>
                             </View>
-                            <View style={{ flexDirection: 'row', marginLeft: 100 }}>
-                                <Image style={{ width: 20, height: 20 }} source={require('../assets/iconDelete.png')} />
-                                <Image
-                                    style={{ width: 20, height: 20, marginLeft: 40, marginRight: 20 }}
-                                    source={require('../assets/iconAdd.png')}
-                                />
+                            <View style={{ flexDirection: 'row', marginLeft: 100, position: 'relative' }}>
+                                <Text
+                                    style={{ position: 'absolute', fontSize: 14, fontWeight: 400, top: 0, right: 55 }}
+                                >
+                                    {count}
+                                </Text>
+                                <TouchableOpacity onPress={handleDelete}>
+                                    <Image
+                                        style={{ width: 20, height: 20 }}
+                                        source={require('../assets/iconDelete.png')}
+                                    />
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={handleAdd}>
+                                    <Image
+                                        style={{ width: 20, height: 20, marginLeft: 40, marginRight: 20 }}
+                                        source={require('../assets/iconAdd.png')}
+                                    />
+                                </TouchableOpacity>
                             </View>
                         </TouchableOpacity>
                     </View>
